@@ -32,6 +32,7 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setUsername($form->get('username')->getData());
+            $user->setBanned(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

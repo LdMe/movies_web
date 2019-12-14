@@ -11,6 +11,8 @@
 <div class="example-wrapper">
     <h1>Hello {{ app.user.username }}! ✅</h1>
     <ul>
+        <h2>My Favorites</h2>
+        <a href="/favorites/new">new<i class="fa fa-envelope-o"></i></a>
     	{% for list in app.user.lists %}
     		<li><ul>
     			{{list.name}}

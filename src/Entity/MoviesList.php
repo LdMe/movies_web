@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MoviesListRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class MoviesList
 {
@@ -45,6 +46,7 @@ class MoviesList
 
     public function __construct()
     {
+        $this->creation_date = new \DateTime();
         $this->movies = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
@@ -142,5 +144,13 @@ class MoviesList
         $this->last_modified = $last_modified;
 
         return $this;
+    }
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateLastModified()
+    {
+        $this->setLastModified(new \DateTime());
     }
 }
